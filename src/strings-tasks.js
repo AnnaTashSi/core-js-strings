@@ -149,9 +149,12 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+  const fo = str.indexOf(value);
+  if (fo === -1) {
+    return str;
+  }
+  return str.slice(0, fo) + str.slice(fo + value.length);
 }
-
 /**
  * Remove the last occurrence of a substring from a string.
  *
@@ -169,7 +172,7 @@ function removeLastOccurrences(str, value) {
   if (li === -1) {
     return str;
   }
-  return str.substring(0, li) + str.substring(li + value.length)
+  return str.substring(0, li) + str.substring(li + value.length);
 }
 
 /**
@@ -189,7 +192,7 @@ function sumOfCodes(str) {
     return 0;
   }
   let sum = 0;
-  for (let i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i += 1) {
     sum += str.charCodeAt(i);
   }
   return sum;
@@ -240,7 +243,7 @@ function endsWith(str, substr) {
  */
 function formatTime(minutes, seconds) {
   const minuteS = String(minutes).padStart(2, '0');
-  const secondS = String(seconds).padStart(2, '0')
+  const secondS = String(seconds).padStart(2, '0');
   return `${minuteS}:${secondS}`;
 }
 
@@ -305,7 +308,7 @@ function containsSubstring(str, substring) {
  */
 function countVowels(str) {
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'];
-  return str.split('').filter(char => vowels.includes(char)).length;
+  return str.split('').filter((char) => vowels.includes(char)).length;
 }
 
 /**
@@ -322,7 +325,7 @@ function countVowels(str) {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
-  const char = str.toLowerCase().replace(/[^a-z0-9]/g, '');;
+  const char = str.toLowerCase().replace(/[^a-z0-9]/g, '');
   const palindrome = char.replace(' ', '').split('').reverse().join('');
   return char === palindrome;
 }
@@ -342,7 +345,7 @@ function isPalindrome(str) {
 function findLongestWord(sentence) {
   const words = sentence.split(' ');
   let longestWord = '';
-  for (let i = 0; i < words.length; i++) {
+  for (let i = 0; i < words.length; i += 1) {
     const compareWord = words[i];
     if (compareWord.length > longestWord.length) {
       longestWord = compareWord;
@@ -473,17 +476,17 @@ function extractEmails(str) {
  *
  */
 function encodeToRot13(str) {
-  let encoded = '';
-  for (let i = 0; i < str.length; i++) {
+  let encode = '';
+  for (let i = 0; i < str.length; i += 1) {
     let charCode = str.charCodeAt(i);
     if (charCode >= 65 && charCode <= 90) {
       charCode = ((charCode - 65 + 13) % 26) + 65;
     } else if (charCode >= 97 && charCode <= 122) {
       charCode = ((charCode - 97 + 13) % 26) + 97;
     }
-    encoded += String.fromCharCode(charCode);
+    encode += String.fromCharCode(charCode);
   }
-  return encoded;
+  return encode;
 }
 
 /**
